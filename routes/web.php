@@ -17,6 +17,9 @@ Route::post('/messages/create', 'MessagesController@create')->middleware('auth')
 
 Auth::routes();
 
+Route::get('/auth/{social}','SocialAuthController@social');
+Route::get('/auth/{social}/callback','SocialAuthController@callback');
+
 Route::get('/home','HomeController@index'  );
 Route::get('/{username}/follows','UsersController@follows');
 Route::get('/{username}/followers','UsersController@followers');
