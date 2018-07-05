@@ -13,12 +13,13 @@
 
 Route::get('/', 'PagesController@home');
 Route::get('/messages/{message}', 'MessagesController@show');
-Route::post('/messages/create', 'MessagesController@create')->middleware('auth');
+Route::get('/messages/create', 'MessagesController@create')->middleware('auth');
 
 Auth::routes();
 
 Route::get('/auth/{social}','SocialAuthController@social');
 Route::get('/auth/{social}/callback','SocialAuthController@callback');
+Route::post('/auth/{socia}/register','SocialAuthController@register');
 
 Route::get('/home','HomeController@index'  );
 Route::get('/{username}/follows','UsersController@follows');
