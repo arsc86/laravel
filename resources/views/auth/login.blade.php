@@ -61,15 +61,13 @@
                             </div>
                         </div>
                     </form>
+                    
+<div class="form-group row">
+    <a href="/auth/facebook" class="btn btn-primary">Login con Facebook</a>
+</div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <a href="/auth/facebook" class="btn btn-primary">Login con Facebook</a>
-</div>
-<div class="row">
-    <a href="/auth/google" class="btn btn-primary google">Login con Google+</a>
 </div>
 @endsection
