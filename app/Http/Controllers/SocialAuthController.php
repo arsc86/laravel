@@ -18,8 +18,7 @@ class SocialAuthController extends Controller
     {
         
         $user = Socialite::driver($social)->user();
-
-
+        
         $existing = User::whereIn('users.id', function($query) use($user) {
                     $query->from('social_profiles')
                             ->select('social_profiles.user_id')
@@ -33,10 +32,11 @@ class SocialAuthController extends Controller
         }
 
         session()->flash($social.'User',$user);
-
-        return view('users.facebook',[
-            'user' => $user
-        ]);
+        
+        $view = 'users.social';
+        
+        return view($view,['user' => $user, 'social' => $social]);
+        
     }
 
     public function register($social,Request $request)

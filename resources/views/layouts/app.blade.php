@@ -22,18 +22,37 @@
     <div id="app" class="container">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel stack-container navbar-static-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+<!--                <a class="navbar-brand" href="{{ url('/') }}">
                     Laratter
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+                </a>-->
+<!--                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-
+                </button>-->
+                <nav>
+                    <ul class="nav nav-pills">  
+                        <li class="nav-item">
+                                <a class="nav nav-link" href="/">Home</a>
+                            </li>
+                        @if(Auth::check())
+                            <li class="nav-item">
+                                <a class="nav nav-link" href="/profile">Profile</a>
+                            </li>
+                        @endif
+                    </ul>        
+                </nav>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">
+                            <form action="/messages">
+                                <div class="input-group">
+                                    <input type="text" name="query" required="" class="form-control" placeholder="Buscar..."/>
+                                    <span class="input-group-btn"/>
+                                    <button class="btn btn-outline-success">Buscar</button>
+                                </div>
+                            </form>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -51,6 +70,7 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" 
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
+                                    <img src="{{ Auth::user()->avatar }}"/>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
