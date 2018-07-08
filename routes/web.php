@@ -11,19 +11,30 @@
 |
 */
 
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@home');//->middleware('secureHttp');
 Route::get('/messages/{message}', 'MessagesController@show');
-Route::get('/messages/create', 'MessagesController@create')->middleware('auth');
 
 Auth::routes();
 
 Route::get('/auth/{social}','SocialAuthController@social');
 Route::get('/auth/{social}/callback','SocialAuthController@callback');
-Route::post('/auth/{socia}/register','SocialAuthController@register');
+Route::post('/auth/{social}/register','SocialAuthController@register');
 
 Route::get('/home','HomeController@index'  );
+Route::get('/messages','MessagesController@search'  );
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::post('/messages/create', 'MessagesController@create');
+    Route::get('/profile', 'UsersController@profile');
+    Route::post('/{username}/follow','UsersController@follow');
+    Route::post('/{username}/unfollow','UsersController@unfollow');
+    Route::post('/{username}/dms','UsersController@sendPrivateMessage'  );
+    Route::get('/conversations/{conversation}','UsersController@showConversation'  );
+});
+
+Route::get('/api/messages/{message}/responses','MessagesController@responses');
+
 Route::get('/{username}/follows','UsersController@follows');
 Route::get('/{username}/followers','UsersController@followers');
-Route::post('/{username}/follow','UsersController@follow')->middleware('auth');
-Route::post('/{username}/unfollow','UsersController@unfollow')->middleware('auth');
 Route::get('/{username}','UsersController@show'  );
+

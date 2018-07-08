@@ -4,16 +4,21 @@
 
 <div class="jumbotron text-center">
     <h1>Laratter By ArSc</h1>
-    <nav>
+<!--    <nav>
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
-            </li>            
-        </ul>
-    </nav>    
+            </li>     
+            @if(Auth::check())
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+            @endif
+        </ul>        
+    </nav>    -->
 </div>
 <div class="row">
-    <form action="/messages/create" method="post">
+    <form action="/messages/create" method="post" enctype="multipart/form-data">
         <div class="form-group">
             {{csrf_field()}}
             <input type="text" name="message" 
@@ -23,6 +28,7 @@
                     <div class='invalid-feedback'>{{$error}}</div>
                 @endforeach
             @endif
+            <input type="file" class="form-control-file" name="image"/>            
         </div>
     </form>    
 </div>
