@@ -6,4 +6,7 @@
 @include('messages.message')
 </p>
 
+<responses>
+    
+</responses>
 @endsection
