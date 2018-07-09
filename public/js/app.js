@@ -49142,14 +49142,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['message'],
     data: function data() {
         return {
-            responses: [{
-                message: "Pruena pec"
-            }]
+            responses: []
         };
+    },
+
+
+    methods: {
+        load: function load() {
+            var _this = this;
+
+            axios.get('/api/messages/' + this.message + '/responses').then(function (res) {
+                _this.responses = res.data;
+            });
+        }
     }
 });
 
@@ -49165,11 +49180,29 @@ var render = function() {
     "div",
     { staticClass: "row" },
     [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Ver respuestas")]),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-outline-primary",
+          attrs: { href: "#" },
+          on: { click: _vm.load }
+        },
+        [_vm._v("Ver respuestas")]
+      ),
       _vm._v(" "),
       _vm._l(_vm.responses, function(response) {
-        return _c("div", { staticClass: "card" }, [
-          _vm._v("\n        " + _vm._s(response.message) + "\n    ")
+        return _c("div", { staticClass: "card mt-2 col-12" }, [
+          _c("div", { staticClass: "card-block" }, [
+            _vm._v(
+              "\n            " + _vm._s(response.message) + "   \n        "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer text-muted" }, [
+            _vm._v(
+              "\n            " + _vm._s(response.created_at) + "   \n        "
+            )
+          ])
         ])
       })
     ],
