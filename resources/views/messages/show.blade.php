@@ -6,7 +6,7 @@
 @include('messages.message')
 </p>
 
-<responses>
+<responses :message={{$message->id}}>
     
 </responses>
 @endsection
