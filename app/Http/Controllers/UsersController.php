@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Notifications\UserFollowed;
 use App\Conversation;
 use App\PrivateMessage;
 
@@ -39,6 +40,10 @@ class UsersController extends Controller
         $user = $this->fingByUsername($username);
         $me = $request->user();
         $me->follows()->attach($user);
+        
+        $user->notify(new UserFollowed($me));
+        
+        
         return redirect("/$username")->withSuccess("Usuario seguido!");        
     }
     
@@ -83,5 +88,10 @@ class UsersController extends Controller
     private function fingByUsername($username)
     {
         return User::where('username',$username)->firstOrFail();
+    }
+    
+    public function notifications(Request $request)
+    {
+        return $request->user()->notifications;
     }
 }
