@@ -59,6 +59,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                                                
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -68,6 +69,12 @@
                                 <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
                             </li>
                         @else
+                            <li class="nav-item dropdown mr-2 mt-3">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Notificaciones <span class="caret"></span>
+                                </a>
+                                <notifications :user="{{ Auth::user()->id }}"></notifications>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" 
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
